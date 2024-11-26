@@ -9,6 +9,7 @@
   "author": "Walison Cristians",
   "license": "ISC",
   "devDependencies": {
+    "@faker-js/faker": "^9.2.0",
     "cypress": "^13.16.0"
   }
 }
