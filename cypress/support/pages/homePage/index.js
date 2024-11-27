@@ -23,6 +23,12 @@ class HomePage{
         cy.get(elem.signup_login).should('be.visible').click()
     }
 
+    validarBotaoLogoutVisivel(){
+        //é validado aqui para poder ser usado em outros testes
+        cy.get(elem.btn_logout).should('be.visible')
+
+    }
+
 
 
 } 

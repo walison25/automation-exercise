@@ -1,10 +1,13 @@
-//será necessário referenciar o cypress na tag abaixo para trazer a documentação e o autocompletar:
+/*
+será necessário referenciar o cypress na tag abaixo para trazer a documentação e o autocompletar:
 //Cada arquivo é único (preciso repetir os processos de acessar, abrir a página, etc)
-//usar before, beforeEach, after e afterEach
+//usar before, beforeEach, after e afterEach*/
+
 ///<reference types = "cypress"/>
 import user_fac from "../Factories/user_fac.js";
 import homePage from '../support/pages/homePage'
-import loginPage from "../support/pages/loginPage/index.js";
+import loginPage from "../support/pages/loginPage";
+import cadastroPage from "../support/pages/cadastroPage";
 
 describe('Validação login', () => {
  
@@ -33,21 +36,27 @@ describe('Validação login', () => {
 
  //Caso de teste 02:
   it('Cadastrar novo usuário', () => {
-   // cy.visit('/')
-   // cy.get('div[class="logo pull-left"]').should('be.visible')
-   // cy.title().should('be.eq', 'Automation Exercise')
-   // cy.get('a').contains('Signup / Login').click() //caso elemento a tenha um signup ele realiza o click
+    /*
+    cy.visit('/')
+    cy.get('div[class="logo pull-left"]').should('be.visible')
+    cy.title().should('be.eq', 'Automation Exercise')
+    cy.get('a').contains('Signup / Login').click() - caso elemento a tenha um signup ele realiza o click 
+    */
+
     homePage.clicarEmLogin()
 
-   //cy.get('input[name = "name"]').should('be.visible').type(newUser.name) //se o elemento estiver visivel, ele faz o preenchimento
-   //cy.get('input[data-qa="signup-email"]').should('be.visible').type(newUser.email)
-   // cy.get('button').should('be.visible').contains('Signup').click()
+     /*
+    cy.get('input[name = "name"]').should('be.visible').type(newUser.name) - se o elemento estiver visivel, ele faz o preenchimento
+    cy.get('input[data-qa="signup-email"]').should('be.visible').type(newUser.email)
+    cy.get('button').should('be.visible').contains('Signup').click()
+    */
    
     loginPage.PreencherNome(newUser.name)
     loginPage.PreencherEmail(newUser.email)
     loginPage.ClicarEmSignup()
-    
-   // cy.get('h2').contains('Enter Account Information').should('be.visible')
+
+    /*
+    cy.get('h2').contains('Enter Account Information').should('be.visible')
     cy.get('#id_gender1').click()
     cy.get('#email').should('have.value', newUser.email)//confirmo se no campo há o valor esperado
     cy.get('#password').type('teste123')
@@ -62,11 +71,30 @@ describe('Validação login', () => {
     cy.get('#city').type('Phoenix') 
     cy.get('#zipcode').type('85001')
     cy.get('#mobile_number').type(newUser.phone)
-   // cy.get('button').contains('Create Account').click()
-    //validação
-   // cy.get('h2[data-qa = "account-created"]').should('be.visible')
-    //cy.get('h2[data-qa = "account-created"]').should('have.text', "Account Created!")
-   // cy.get('[data-qa = "continue-button"]').should('be.visible').click() 
+    cy.get('button').contains('Create Account').click()
+    */
+
+    cadastroPage.validarTituloPagina('Enter Account Information')
+    cadastroPage.selecionarGeneroMasculino()
+    cadastroPage.validarEmailPreenchido(newUser.email)
+    cadastroPage.preencherPassword('teste123')
+    cadastroPage.preencherData("25","10","1994")
+    cadastroPage.preencherFirstName("Walison")
+    cadastroPage.preencherLastName("Teste")
+    cadastroPage.preencherEndereco('Teste endereço', 'United States', 'Arizona', 'Phoenix', '85001')
+    cadastroPage.preencherPhone(newUser.phone)
+
+
+    /*
+    validação:
+    cy.get('h2[data-qa = "account-created"]').should('be.visible')
+    cy.get('h2[data-qa = "account-created"]').should('have.text', "Account Created!")
+    cy.get('[data-qa = "continue-button"]').should('be.visible').click() 
+    */
+
+    cadastroPage.clicarEmCreateAccount()
+    cadastroPage.validarUsuarioCadastradoSucesso()
+    homePage.validarBotaoLogoutVisivel()
 
   })
 

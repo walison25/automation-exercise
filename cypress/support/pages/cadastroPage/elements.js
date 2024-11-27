@@ -16,7 +16,10 @@ export const ELEMENTS = {
     input_state: '#state',
     input_city: '#city',
     input_zipcode: '#zipcode',
-    input_mobileNumber: '#mobile_number'
+    input_mobileNumber: '#mobile_number',
+    msg_accountCreate: 'h2[data-qa="account-created"]',
+    btn_continue: '[data-qa="continue-button"]',
+    btn: 'button'
 
  }
  
