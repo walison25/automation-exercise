@@ -3,42 +3,51 @@
 //usar before, beforeEach, after e afterEach
 ///<reference types = "cypress"/>
 import user_fac from "../Factories/user_fac.js";
-import HomePage from '../support/pages/homePage'
+import homePage from '../support/pages/homePage'
+import loginPage from "../support/pages/loginPage/index.js";
 
 describe('Validação login', () => {
  
     let newUser = user_fac.createUser();
 
-  //beforeEach(() =>{
+  beforeEach(() =>{//antes de cada it faça:
   //  cy.fixture('user_fixture').then((user) =>{//faz referência ao arquivo user_fixture.json, a variável user recebe a estrutura do arquivo
   //   newUser = user;
   //  })
- // })
+
+  homePage.acessarUrl()
+  homePage.validarLogoHome()
+  
+  })
 
   //Caso de teste 01:
-  it.only('Acessar a URL com SUCESSO', () => {
+  it('Acessar a URL com SUCESSO', () => {
     //xit ou skip pula o teste ou o only executa um único teste
     // cy.visit('/')//visita o site para localizar os elementos (por segurança é preciso validar os elementos carregados na página), site padrão configurado em cypress.config.js
     // cy.get('div[class="logo pull-left"]').should('be.visible')//valida se a div referida está visivel no site
     // cy.title().should('be.eq', 'Automation Exercise') //valida se o título da página é igual ao esperado
-
-    HomePage.acessarUrl()
-    HomePage.validarLogoHome()
-    HomePage.validarTituloPagina()
-
+    
+    homePage.validarTituloPagina()
 
   })
 
  //Caso de teste 02:
   it('Cadastrar novo usuário', () => {
-    cy.visit('/')
-    cy.get('div[class="logo pull-left"]').should('be.visible')
-    cy.title().should('be.eq', 'Automation Exercise')
-    cy.get('a').contains('Signup / Login').click() //caso elemento a tenha um signup ele realiza o click
-    cy.get('input[name = "name"]').should('be.visible').type(newUser.name) //se o elemento estiver visivel, ele faz o preenchimento
-    cy.get('input[data-qa="signup-email"]').should('be.visible').type(newUser.email)
-    cy.get('button').should('be.visible').contains('Signup').click()
-    cy.get('h2').contains('Enter Account Information').should('be.visible')
+   // cy.visit('/')
+   // cy.get('div[class="logo pull-left"]').should('be.visible')
+   // cy.title().should('be.eq', 'Automation Exercise')
+   // cy.get('a').contains('Signup / Login').click() //caso elemento a tenha um signup ele realiza o click
+    homePage.clicarEmLogin()
+
+   //cy.get('input[name = "name"]').should('be.visible').type(newUser.name) //se o elemento estiver visivel, ele faz o preenchimento
+   //cy.get('input[data-qa="signup-email"]').should('be.visible').type(newUser.email)
+   // cy.get('button').should('be.visible').contains('Signup').click()
+   
+    loginPage.PreencherNome(newUser.name)
+    loginPage.PreencherEmail(newUser.email)
+    loginPage.ClicarEmSignup()
+    
+   // cy.get('h2').contains('Enter Account Information').should('be.visible')
     cy.get('#id_gender1').click()
     cy.get('#email').should('have.value', newUser.email)//confirmo se no campo há o valor esperado
     cy.get('#password').type('teste123')

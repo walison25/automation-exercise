@@ -19,6 +19,10 @@ class HomePage{
 
     }
 
+    clicarEmLogin(){
+        cy.get(elem.signup_login).should('be.visible').click()
+    }
+
 
 
 } 
