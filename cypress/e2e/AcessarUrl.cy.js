@@ -3,6 +3,7 @@
 //usar before, beforeEach, after e afterEach
 ///<reference types = "cypress"/>
 import user_fac from "../Factories/user_fac.js";
+import HomePage from '../support/pages/homePage'
 
 describe('Validação login', () => {
  
@@ -15,14 +16,21 @@ describe('Validação login', () => {
  // })
 
   //Caso de teste 01:
-  it('Acessar a URL com SUCESSO', () => {//xit ou skip pula o teste ou o only executa um único teste
-    cy.visit('/')//visita o site para localizar os elementos (por segurança é preciso validar os elementos carregados na página), site padrão configurado em cypress.config.js
-    cy.get('div[class="logo pull-left"]').should('be.visible')//valida se a div referida está visivel no site
-    cy.title().should('be.eq', 'Automation Exercise') //valida se o título da página é igual ao esperado
+  it.only('Acessar a URL com SUCESSO', () => {
+    //xit ou skip pula o teste ou o only executa um único teste
+    // cy.visit('/')//visita o site para localizar os elementos (por segurança é preciso validar os elementos carregados na página), site padrão configurado em cypress.config.js
+    // cy.get('div[class="logo pull-left"]').should('be.visible')//valida se a div referida está visivel no site
+    // cy.title().should('be.eq', 'Automation Exercise') //valida se o título da página é igual ao esperado
+
+    HomePage.acessarUrl()
+    HomePage.validarLogoHome()
+    HomePage.validarTituloPagina()
+
+
   })
 
  //Caso de teste 02:
-  it.only('Cadastrar novo usuário', () => {
+  it('Cadastrar novo usuário', () => {
     cy.visit('/')
     cy.get('div[class="logo pull-left"]').should('be.visible')
     cy.title().should('be.eq', 'Automation Exercise')
