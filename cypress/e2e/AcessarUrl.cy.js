@@ -20,6 +20,8 @@ describe('Validação login', () => {
 
   homePage.acessarUrl()
   homePage.validarLogoHome()
+ 
+  cy.login('walison25@gmail.com', 'teste123') //dado alimenta o commands
   
   })
 
@@ -33,7 +35,13 @@ describe('Validação login', () => {
     homePage.validarTituloPagina()
 
   })
+    it.only('Validar login',() => {
+      cy.visit('/') //quando se utiliza o session se faz necessário usar o visit, para limpar e armazenar os dados e reutilizar a session
+      cy.get('b').should('have.text', 'Walison teste')
+     // cy.viewport('iphone-6','landscape') => para simular outros tipos de tela
 
+
+    })
  //Caso de teste 02:
   it('Cadastrar novo usuário', () => {
     /*
