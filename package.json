@@ -4,12 +4,17 @@
   "description": "Projeto capacitação cypress",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "web": "cypress open",
+    "back": "cypress run -b chrome",
+    "mobile": "cypress run --browser chrome --config viewportWidth=400,viewportHeight=800"
   },
   "author": "Walison Cristians",
   "license": "ISC",
   "devDependencies": {
     "@faker-js/faker": "^9.2.0",
     "cypress": "^13.16.0"
+  },
+  "dependencies": {
+    "automation-exercise": "file:"
   }
 }
