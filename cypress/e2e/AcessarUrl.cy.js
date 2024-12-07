@@ -38,7 +38,13 @@ describe('Validação login', () => {
     it.only('Validar login',() => {
       cy.visit('/') //quando se utiliza o session se faz necessário usar o visit, para limpar e armazenar os dados e reutilizar a session
       cy.get('b').should('have.text', 'Walison teste')
-     // cy.viewport('iphone-6','landscape') => para simular outros tipos de tela
+      cy.viewport('iphone-6','portrait') //=> para simular outros tipos de tela
+
+      cy.get("a").contains('Home').should('have.css', 'color','rgb(255, 165, 0)')
+      cy.get("a").contains('Home').should('have.css', 'font-size','14px')
+
+      cy.get("a").contains('Home').invoke('removeAttr', 'style')
+      //cy.get('img').should('have.attr', 'src', "get_product_picture/1").trigger("mousemove")
 
 
     })
